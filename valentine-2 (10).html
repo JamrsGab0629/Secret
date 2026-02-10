@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day ❤️</title>
+    <style>
+        /* ========== RESET & BASE STYLES ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ffc3d5 50%, #ff6b9d 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            position: relative;
+        }
+
+        /* Animated gradient background */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ========== MAIN CONTAINER ========== */
+        .container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(255, 107, 157, 0.4);
+            position: relative;
+            z-index: 10;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ========== TYPOGRAPHY ========== */
+        h1 {
+            color: #e63946;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(230, 57, 70, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .subtitle {
+            color: #d63384;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        /* ========== MESSAGE AREA ========== */
+        .message-box {
+            margin: 2rem 0;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 1rem;
+            border: 2px solid #ffb3c6;
+            border-radius: 15px;
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            resize: vertical;
+            transition: all 0.3s ease;
+            background: #fff5f8;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #ff6b9d;
+            box-shadow: 0 0 15px rgba(255, 107, 157, 0.3);
+        }
+
+        /* ========== BUTTON ========== */
+        .reveal-btn {
+            background: linear-gradient(135deg, #e63946, #ff6b9d);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(230, 57, 70, 0.4);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .reveal-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(230, 57, 70, 0.5);
+        }
+
+        .reveal-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* ========== FLOATING HEARTS ========== */
+        .heart {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0;
+            animation: float 10s infinite ease-in;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* ========== MODAL/POPUP ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInModal 0.3s ease;
+        }
+
+        @keyframes fadeInModal {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 30px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            width: 85%;
+            text-align: center;
+            position: relative;
+            animation: slideIn 0.5s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-content h2 {
+            color: #e63946;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content p {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .close-btn {
+            background: #ff6b9d;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: #e63946;
+            transform: scale(1.05);
+        }
+
+        /* ========== CONFETTI ========== */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ff6b9d;
+            position: fixed;
+            animation: confettiFall 3s ease-out forwards;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* ========== MUSIC PLAYER ========== */
+        .music-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .music-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #ff6b9d;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(255, 107, 157, 0.4);
+        }
+
+        /* ========== DECORATIVE HEARTS ========== */
+        .deco-heart {
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.2;
+            transition: all 0.3s ease;
+        }
+
+        .deco-heart:hover {
+            transform: scale(1.5);
+            opacity: 0.6;
+        }
+
+        .top-left { top: -20px; left: -20px; }
+        .top-right { top: -20px; right: -20px; }
+        .bottom-left { bottom: -20px; left: -20px; }
+        .bottom-right { bottom: -20px; right: -20px; }
+
+        /* ========== RESPONSIVE DESIGN ========== */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 1.5rem;
+            }
+
+            .modal-content {
+                padding: 2rem;
+            }
+
+            .modal-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .modal-content p {
+                font-size: 1rem;
+            }
+
+            .music-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.7rem;
+            }
+
+            .reveal-btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Decorative corner hearts -->
+        <span class="deco-heart top-left">❤️</span>
+        <span class="deco-heart top-right">💕</span>
+        <span class="deco-heart bottom-left">💖</span>
+        <span class="deco-heart bottom-right">💗</span>
+
+        <h1>Happy Valentine's Day ❤️</h1>
+        <p class="subtitle">To the one who fills my heart with endless joy and wonder</p>
+
+        <!-- Customizable message area -->
+        <div class="message-box">
+            <textarea id="customMessage" placeholder="Write your heartfelt message here... 💌">My Dearest Love,
+
+On this special Valentine's Day, I want you to know just how much you mean to me. From the moment you came into my life, everything changed for the better. You've brought colors to my world that I never knew existed, and you've shown me what true love really feels like.
+
+Every day with you is a gift that I treasure deeply. Your smile brightens even my darkest days, your laughter is the sweetest melody I've ever heard, and your love is the warmth that keeps my heart beating. You inspire me to be a better person, and you believe in me even when I doubt myself.
+
+I love the way you look at me, the way you hold my hand, and the way you make ordinary moments feel extraordinary. I love your kindness, your strength, your beautiful soul, and everything that makes you uniquely you. You are my best friend, my confidant, my partner in all of life's adventures.
+
+Thank you for choosing me, for loving me, and for being the amazing person you are. I promise to cherish you, support you, and love you with all my heart, today and always.
+
+Forever yours,
+With all my love 🌹💕</textarea>
+        </div>
+
+        <!-- Reveal surprise button -->
+        <button class="reveal-btn" onclick="revealSurprise()">💖 Click for a Surprise! 💖</button>
+    </div>
+
+    <!-- Modal/Popup for surprise message -->
+    <div class="modal" id="surpriseModal">
+        <div class="modal-content">
+            <h2>💕 You Are Loved! 💕</h2>
+            <p id="surpriseMessage">
+                Every moment with you is a treasure. You bring joy, laughter, and endless love into my life. 
+                Thank you for being you! 🌹✨
+            </p>
+            <button class="close-btn" onclick="closeModal()">Close ❤️</button>
+        </div>
+    </div>
+
+    <!-- Music controls -->
+    <div class="music-controls">
+        <button class="music-btn" onclick="toggleMusic()" id="musicBtn" title="Toggle Music">
+            🔇
+        </button>
+    </div>
+
+    <!-- Hidden audio element (simple romantic tune using data URI - a short melody) -->
+    <audio id="bgMusic" loop>
+        <!-- Using a data URI for a simple romantic tone sequence -->
+        <!-- Note: For a real song, replace this with a URL to an MP3 file -->
+        <source src="" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // ========== FLOATING HEARTS ANIMATION ==========
+        // Create floating hearts in the background
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = ['❤️', '💕', '💖', '💗', '💝'][Math.floor(Math.random() * 5)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 5 + 8) + 's';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            heart.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+            document.body.appendChild(heart);
+
+            // Remove heart after animation completes to avoid memory leaks
+            setTimeout(() => {
+                heart.remove();
+            }, 15000);
+        }
+
+        // Generate hearts continuously
+        setInterval(createFloatingHeart, 800);
+
+        // Initial batch of hearts
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createFloatingHeart, i * 300);
+        }
+
+        // ========== CONFETTI ANIMATION ==========
+        function createConfetti() {
+            const colors = ['#ff6b9d', '#ffc3d5', '#e63946', '#ff0080', '#ff69b4', '#ffb3c6'];
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.classList.add('confetti');
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.top = -10 + 'px';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.width = (Math.random() * 10 + 5) + 'px';
+                    confetti.style.height = (Math.random() * 10 + 5) + 'px';
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                    
+                    // Random shapes (square or circle)
+                    if (Math.random() > 0.5) {
+                        confetti.style.borderRadius = '50%';
+                    }
+                    
+                    document.body.appendChild(confetti);
+
+                    // Remove confetti after animation
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 4000);
+                }, i * 30);
+            }
+        }
+
+        // ========== MODAL FUNCTIONALITY ==========
+        function revealSurprise() {
+            const modal = document.getElementById('surpriseModal');
+            const customMessage = document.getElementById('customMessage').value.trim();
+            const surpriseMessageEl = document.getElementById('surpriseMessage');
+            
+            // If user wrote a custom message, show it in the modal
+            if (customMessage) {
+                surpriseMessageEl.innerHTML = `
+                    <strong>Your message:</strong><br><br>
+                    "${customMessage}"<br><br>
+                    <em>Sending all my love to you! 💕</em>
+                `;
+            } else {
+                surpriseMessageEl.innerHTML = `
+                    <strong>A Love Letter From My Heart</strong><br><br>
+                    
+                    My dearest, on this Valentine's Day, I want to express the depth of my feelings for you. 
+                    Words can barely capture the magnitude of what you mean to me, but let me try...<br><br>
+                    
+                    You are the sunshine that breaks through my cloudy days, the star that guides me through the darkest nights. 
+                    Your presence in my life has transformed everything - the mundane has become magical, the ordinary has become 
+                    extraordinary, and every moment feels like a blessing.<br><br>
+                    
+                    I cherish every conversation we share, every laugh we exchange, every dream we build together. 
+                    You've shown me what it means to truly connect with another soul, to be vulnerable yet safe, 
+                    to love without fear. You accept me for who I am, flaws and all, and you inspire me to grow 
+                    into the best version of myself.<br><br>
+                    
+                    Thank you for your patience, your kindness, your unwavering support. Thank you for believing in us, 
+                    for fighting for our love, for choosing me every single day. You are my greatest adventure, 
+                    my safe haven, my forever.<br><br>
+                    
+                    I love you more than words can say, more than any gesture can show. Today and always, 
+                    you have my whole heart. Happy Valentine's Day, my love! 💕🌹✨<br><br>
+                    
+                    <em>Forever and always yours,<br>
+                    With endless love ❤️</em>
+                `;
+            }
+            
+            modal.style.display = 'flex';
+            createConfetti();
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('surpriseModal');
+            modal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('surpriseModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // ========== MUSIC PLAYER ==========
+        let musicPlaying = false;
+        const music = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
+
+        // Note: The audio element has no source, as including actual music files
+        // would require external resources. You can add your own romantic music
+        // by replacing the src attribute with a URL to an MP3 file.
+        
+        function toggleMusic() {
+            if (musicPlaying) {
+                music.pause();
+                musicBtn.innerHTML = '🔇';
+                musicPlaying = false;
+            } else {
+                // Attempt to play - will only work if source is provided
+                music.play().catch(err => {
+                    console.log('Music not available. Add an MP3 URL to the audio element.');
+                    alert('💝 To enable music, add a URL to a romantic song in the audio element!');
+                });
+                musicBtn.innerHTML = '🔊';
+                musicPlaying = true;
+            }
+        }
+
+        // ========== KEYBOARD SHORTCUTS ==========
+        // Press 'Escape' to close modal
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // ========== CONSOLE MESSAGE ==========
+        console.log('💖 Happy Valentine\'s Day! 💖');
+        console.log('Made with love ❤️');
+    </script>
+</body>
+</html>
